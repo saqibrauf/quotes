@@ -1,10 +1,11 @@
 {% extends 'master.html' %}
-
+{% load static %}
 {% block 'content' %}
 
-<div class="hero is-fullheight is-primary is-bold">
+<div class="hero is-fullheight is-black is-bold">
 	<div class="hero-body">
 		<div class="container has-text-centered">
+			<img src="{% static 'images/quote.png' %}" style="max-width: 256px; height: auto;">
 			<h1 class="title is-1">MY QUOTES</h1>
 			<p class="subtitle is-3">Coming Soon!</p>
 		</div>
