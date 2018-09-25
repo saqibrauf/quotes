@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block 'title' %}My Quotes{% endblock %}</title>
+	<link href="https://fonts.googleapis.com/css?family=Asap:400,600|Asap+Condensed:700" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+	<nav class="navbar is-light is-fixed-top">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{% url 'index' %}">
+                	<h1 class="is-marginless has-text-dark is-size-4 is-uppercase">My <span class="has-text-primary">Quotes</span></h1>
+                </a>
+                <div class="navbar-burger burger" data-target="navMain">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navMain" class="navbar-menu">
+                <div class="navbar-end">
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="content is-marginless">
+    	{% block 'content' %}{% endblock %}
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
