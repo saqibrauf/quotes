@@ -10,7 +10,7 @@
 	<hr>
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag is-primary is-large is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}}</a>
+			<a class="tag is-primary is-large is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
 		{% endfor %}
 	</div>
 {% endif %}

@@ -36,14 +36,23 @@
                 <main class="column is-9-desktop">
                     {% block 'content' %}{% endblock %}
                 </main>
+                
                 <aside class="column is-3-desktop">
                     {% if tag_cloud %}
                         <h3>Tag Cloud</h3>
                         <div class="tags">
                             {% for t in tag_cloud %}
-                                <a class="tag is-primary is-medium is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}}</a>
+                                <a class="tag is-primary is-medium is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
                             {% endfor %}
                         </div>
+                    {% endif %}
+                    {% if author_list %}
+                        <h3>Authors</h3>
+                        <ul>
+                            {% for a in author_list %}
+                                <li><a class="has-text-primary" href="{% url 'author' a.author_slug %}">{{a.author_name}}</a></li>
+                            {% endfor %}
+                        </ul>
                     {% endif %}
                     {% block 'sidebar' %}{% endblock %}
                 </aside>
