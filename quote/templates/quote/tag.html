@@ -1,13 +1,12 @@
 {% extends 'master.html' %}
 {% load static %}
-
-
 {% block 'content' %}
 
-<h1>Recent Quotes</h1>
+<h1>Quotes of {{tag.tag_name}}</h1>
+
 {% for q in quotes %}
 	<div class="content">
-		<blockquote><a class="has-text-black" href="{% url 'quote' q.quote_slug %}">{{q.quote}}</a><cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' q.author_name.author_slug %}">({{q.author_name}})</a></cite></blockquote>		
+		<blockquote><a class="has-text-black" href="{% url 'quote' q.quote_slug %}">{{q.quote}}</a><cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' q.author_name.author_slug %}">({{q.author_name}})</a></blockquote>		
 	</div>	
 	{% if q.tags.all %}
 		<div class="tags">

@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-	<nav class="navbar is-light is-fixed-top">
+	<nav class="navbar is-primary is-fixed-top">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{% url 'index' %}">
-                	<h1 class="is-marginless has-text-dark is-size-4 is-uppercase">My <span class="has-text-primary">Quotes</span></h1>
+                	<p class="is-marginless has-text-white is-size-4">My<span class="has-text-warning has-text-weight-bold">Quotes</span></p>
                 </a>
                 <div class="navbar-burger burger" data-target="navMain">
                     <span></span>
@@ -30,9 +30,26 @@
             </div>
         </div>
     </nav>
-    <main class="content is-marginless">
-    	{% block 'content' %}{% endblock %}
-    </main>
+    <div class="section">
+        <div class="container content">
+            <div class="columns is-desktop">
+                <main class="column is-9-desktop">
+                    {% block 'content' %}{% endblock %}
+                </main>
+                <aside class="column is-3-desktop">
+                    {% if tag_cloud %}
+                        <h3>Tag Cloud</h3>
+                        <div class="tags">
+                            {% for t in tag_cloud %}
+                                <a class="tag is-primary is-medium is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% block 'sidebar' %}{% endblock %}
+                </aside>
+            </div>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
