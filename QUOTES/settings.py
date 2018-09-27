@@ -25,7 +25,7 @@ SECRET_KEY = '3%klz&e5h(&3#edwc$c(qn*d%oduxo(ggh+$y5hrmkxb9s-)$)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [http://localhost:8000, amadarsal.pythonanywhere.com]
 
 
 # Application definition
