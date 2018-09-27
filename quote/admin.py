@@ -1,7 +1,20 @@
 from django.contrib import admin
 from .models import Author, Quote, Tag
 
-admin.site.register(Author)
-admin.site.register(Quote)
-admin.site.register(Tag)
 
+
+class AuthorAdmin(admin.ModelAdmin):
+	search_fields = ['author_name']
+
+
+class TagAdmin(admin.ModelAdmin):
+	search_fields = ['tag_name']
+
+
+class QuoteAdmin(admin.ModelAdmin):
+	autocomplete_fields = ['author_name', 'tags']
+
+
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(Tag, TagAdmin)
+admin.site.register(Quote, QuoteAdmin)
