@@ -34,7 +34,7 @@ class Tag(models.Model):
 
 
 class Quote(models.Model):
-	user_name = models.ForeignKey(User, on_delete=models.CASCADE)
+	#user_name = models.ForeignKey(User, on_delete=models.CASCADE)
 	author_name = models.ForeignKey(Author, on_delete=models.CASCADE)
 	date_created = models.DateTimeField(auto_now=True)
 	quote = models.TextField()
