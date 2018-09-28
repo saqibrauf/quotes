@@ -5,17 +5,18 @@
 <h1>Quotes of {{tag.tag_name}}</h1>
 
 {% for q in quotes %}
-	<div class="content">
-		<blockquote><a class="has-text-black" href="{% url 'quote' q.quote_slug %}">{{q.quote}}</a><cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' q.author_name.author_slug %}">({{q.author_name}})</a></blockquote>		
-	</div>	
-	{% if q.tags.all %}
-		<div class="tags">
-			{% for t in q.tags.all %}
-				<a class="tag is-primary is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
-			{% endfor %}
-		</div>
-	{% endif %}
-	<hr>
+	<div class="box">
+		<div class="content">
+			<blockquote><a class="has-text-black" href="{% url 'quote' q.quote_slug %}">{{q.quote}}</a><cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' q.author_name.author_slug %}">({{q.author_name}})</a></blockquote>		
+		</div>	
+		{% if q.tags.all %}
+			<div class="tags">
+				{% for t in q.tags.all %}
+					<a class="tag is-info is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
 {% empty %}
 	<p class="is-size-1">There is no quote to display.</p>
 {% endfor %}

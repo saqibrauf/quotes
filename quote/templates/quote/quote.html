@@ -1,16 +1,17 @@
 {% extends 'master.html' %}
 {% block 'content' %}
 
-<div class="content">
-	<blockquote class="is-size-4">{{quote.quote}}</blockquote>
-	<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' quote.author_name.author_slug %}">({{quote.author_name}})</a></cite>	
+<div class="box">
+	<div class="content">
+		<blockquote class="is-size-3-desktop is-size-5-touch">{{quote.quote}}</blockquote>
+		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' quote.author_name.author_slug %}">({{quote.author_name}})</a></cite>	
+	</div>
 </div>
 
 {% if quote.tags.all %}
-	<hr>
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag is-primary is-large is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
+			<a class="tag is-info is-medium is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
 		{% endfor %}
 	</div>
 {% endif %}
