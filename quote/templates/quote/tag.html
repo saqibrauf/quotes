@@ -2,7 +2,7 @@
 {% load static %}
 {% block 'content' %}
 
-<h1>Quotes of {{tag.tag_name}}</h1>
+<h1>{{tag.name|title}} Quotes</h1>
 
 {% for q in quotes %}
 	<div class="box">
@@ -12,7 +12,7 @@
 		{% if q.tags.all %}
 			<div class="tags">
 				{% for t in q.tags.all %}
-					<a class="tag is-info is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
+					<a class="tag is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
 				{% endfor %}
 			</div>
 		{% endif %}

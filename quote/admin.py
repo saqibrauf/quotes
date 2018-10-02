@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Quote, Tag
+from .models import Author, Quote
 
 
 
@@ -7,14 +7,10 @@ class AuthorAdmin(admin.ModelAdmin):
 	search_fields = ['author_name']
 
 
-class TagAdmin(admin.ModelAdmin):
-	search_fields = ['tag_name']
-
-
 class QuoteAdmin(admin.ModelAdmin):
-	autocomplete_fields = ['author_name', 'tags']
+	autocomplete_fields = ['author_name']
+	list_display = ('quote', 'author_name')
 
 
 admin.site.register(Author, AuthorAdmin)
-admin.site.register(Tag, TagAdmin)
 admin.site.register(Quote, QuoteAdmin)

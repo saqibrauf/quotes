@@ -11,7 +11,7 @@
 {% if quote.tags.all %}
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag is-info is-medium is-capitalized" href="{% url 'tag' t.tag_slug %}">{{t.tag_name}} Quotes</a>
+			<a class="tag is-info is-medium is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
 		{% endfor %}
 	</div>
 {% endif %}
