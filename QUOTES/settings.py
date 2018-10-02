@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quote',
     'taggit',
-    'taggit_templatetags2',
 ]
 
 MIDDLEWARE = [
