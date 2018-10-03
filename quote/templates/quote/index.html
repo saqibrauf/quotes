@@ -12,7 +12,7 @@
 		{% if q.tags.all %}
 			<div class="tags">
 				{% for t in q.tags.all %}
-					<a class="tag is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
+					<a class="tag button is-outlined is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
 				{% endfor %}
 			</div>
 		{% endif %}	

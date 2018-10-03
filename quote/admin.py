@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Author, Quote
+from taggit.models import Tag
 
 
 
@@ -8,7 +9,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 class QuoteAdmin(admin.ModelAdmin):
-	autocomplete_fields = ['author_name']
+	autocomplete_fields = ['author_name', 'tags']
 	list_display = ('quote', 'author_name')
 
 

@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body class="has-background-light">
+<body>
     <div class="hero is-dark" style="background-image: url({% static 'images/bg2.jpg' %}); background-size: cover;">
         <div class="hero-body has-text-centered">
             <div class="container">
@@ -52,7 +52,7 @@
                         <h3>Tags</h3>
                         <div class="tags">
                             {% for t in tag_cloud %}
-                                <a class="tag is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
+                                <a class="tag button is-outlined is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
                             {% endfor %}
                         </div>
                     {% endif %}
