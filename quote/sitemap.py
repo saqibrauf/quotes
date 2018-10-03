@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from .models import Author, Quote
 from taggit.models import Tag
+from django.urls import reverse
 
 class AuthorSitemap(Sitemap):    
     changefreq = "daily"
@@ -22,3 +23,6 @@ class TagSitemap(Sitemap):
 
     def items(self):
         return Tag.objects.all()
+
+    def location(self, item):
+    	return reverse('tag', args=[str(item.slug)])
