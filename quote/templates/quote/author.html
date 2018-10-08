@@ -1,5 +1,9 @@
 {% extends 'master.html' %}
 {% load static %}
+
+{% block 'title' %}{{author.author_name|title}} Quotes - QuotesHawks.com{% endblock %}
+{% block 'description' %}Find best {{author.author_name|title}} Quotes from QuotesHawks.com. send {{author.author_name|title}} Quotes to your friends and family daily updated list with trendy hot {{author.author_name|title}} Quotes{% endblock %}
+
 {% block 'content' %}
 
 <h1>Quotes of {{author.author_name}}</h1>

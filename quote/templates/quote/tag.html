@@ -1,5 +1,10 @@
 {% extends 'master.html' %}
 {% load static %}
+
+{% block 'title' %}{{tag.name|title}} Quotes - QuotesHawks.com{% endblock %}
+{% block 'description' %}Find top {{tag.name|title}} Quotes from QuotesHawks.com. send {{tag.name|title}} Quote to your friends and family daily updated list with trendy hot {{tag.name|title}}{% endblock %}
+
+
 {% block 'content' %}
 
 <h1>{{tag.name|title}} Quotes</h1>

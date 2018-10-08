@@ -5,26 +5,20 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block 'title' %}My Quotes{% endblock %}</title>
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+	<title>{% block 'title' %}QuoteHawks.Com{% endblock %}</title>
+    <meta name="description" content="{% block 'description' %}{% endblock %}">
+	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,700" rel="stylesheet">
+     <link rel="canonical" href="{{request.build_absolute_uri}}" />
     <link rel="icon" href="{% static 'images/quote.png' %}" type="image/png">
 	<link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div class="hero is-dark" style="background-image: url({% static 'images/bg2.jpg' %}); background-size: cover;">
-        <div class="hero-body has-text-centered">
-            <div class="container">
-                <img src="{% static 'images/quote.png' %}" style="max-width: 200px;">
-                <h2 class="title is-1">My Quotes</h2>
-            </div>
-        </div>
-    </div>
 	<nav class="navbar is-primary is-fixed-top">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{% url 'index' %}">
-                	<p class="is-marginless has-text-white is-size-4">My<span class="has-text-warning has-text-weight-bold">Quotes</span></p>
+                	<p class="is-marginless has-text-white is-size-4 has-text-weight-bold">Quote<span class="has-text-weight-normal">Hawks</span></p>
                 </a>
                 <div class="navbar-burger burger" data-target="navMain">
                     <span></span>
@@ -44,7 +38,6 @@
             <div class="columns is-desktop">
                 <main class="column is-9-desktop">
                     {% block 'content' %}{% endblock %}
-
                 </main>
                 <hr class="is-hidden-desktop">
                 <aside class="column is-3-desktop">
@@ -69,8 +62,8 @@
             </div>
         </div>
     </div>
-    <footer class="footer has-background-dark">
-        
+    <footer class="footer has-background-dark has-text-centered">
+        <a class="is-size-3 has-text-light has-text-weight-bold is-uppercase" href="{% url 'index' %}">Quote Hawks</a>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
