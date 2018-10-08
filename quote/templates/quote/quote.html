@@ -7,7 +7,7 @@
 
 <div class="box">
 	<div class="content">
-		<blockquote class="is-size-3-desktop is-size-5-touch">{{quote.quote}}</blockquote>
+		<blockquote class="is-size-3-desktop is-size-5-mobile has-background-white">{{quote.quote}}</blockquote>
 		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' quote.author_name.author_slug %}">({{quote.author_name}})</a></cite>	
 	</div>
 </div>
@@ -15,7 +15,7 @@
 {% if quote.tags.all %}
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag button is-outlined is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
+			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
 		{% endfor %}
 	</div>
 {% endif %}

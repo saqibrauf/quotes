@@ -10,12 +10,12 @@
 {% for q in quotes %}
 	<div class="box">
 		<div class="content">
-			<blockquote><a class="has-text-black" href="{% url 'quote' q.quote_slug %}">{{q.quote}}</a><cite class="has-text-weight-bold"> ({{q.author_name}})</cite></blockquote>		
+			<blockquote class="has-background-white"><a class="has-text-black" href="{% url 'quote' q.quote_slug %}">{{q.quote}}</a><cite class="has-text-weight-bold"> ({{q.author_name}})</cite></blockquote>		
 		</div>	
 		{% if q.tags.all %}
 			<div class="tags">
 				{% for t in q.tags.all %}
-					<a class="tag button is-outlined is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
+					<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
 				{% endfor %}
 			</div>
 		{% endif %}
