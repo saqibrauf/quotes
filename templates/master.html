@@ -41,14 +41,6 @@
                 </main>
                 <hr class="is-hidden-desktop">
                 <aside class="column is-3-desktop">
-                    {% if tag_cloud %}
-                        <h3>Tags</h3>
-                        <div class="tags">
-                            {% for t in tag_cloud %}
-                                <a class="tag button is-outlined is-info is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
                     {% if author_list %}
                         <h3>Authors</h3>
                         <ul>

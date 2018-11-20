@@ -27,7 +27,7 @@ class Quote(models.Model):
 	author_name = models.ForeignKey(Author, on_delete=models.CASCADE, blank=True, null=True)
 	date_created = models.DateTimeField(auto_now=True)
 	quote = models.TextField(unique=True)
-	tags = tags = TaggableManager()
+	tags = TaggableManager()
 	quote_slug = models.SlugField(max_length=100, blank=True, editable=False)
 
 	def __str__(self):
