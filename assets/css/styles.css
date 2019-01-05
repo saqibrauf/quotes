@@ -24,11 +24,6 @@ b, strong {
 	font-weight: 700;
 }
 
-.background {
-	background-position: center;
-	background-size: cover;
-}
-
-.bg1 {
-	background-image: url(../images/bg1.jpeg);
+.pagination-list li+li {
+	margin-top: 0;
 }
