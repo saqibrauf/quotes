@@ -1,6 +1,6 @@
 {% extends 'master.html' %}
 
-{% block 'title' %}{{quote.quote|truncatewords:70}}{% endblock %}
+{% block 'title' %}{{quote.quote|truncatechars:70}}{% endblock %}
 {% block 'description' %}{{quote.quote|truncatewords:120}}{% endblock %}
 
 {% block 'content' %}
@@ -8,14 +8,14 @@
 <div class="box">
 	<div class="content">
 		<blockquote class="is-size-3-desktop is-size-5-mobile has-background-white">{{quote.quote}}</blockquote>
-		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' quote.author_name.author_slug %}">({{quote.author_name}})</a></cite>	
+		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' slug=quote.author.slug id=quote.author.id %}">({{quote.author}})</a></cite>	
 	</div>
 </div>
 
 {% if quote.tags.all %}
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}} Quotes</a>
+			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}}</a>
 		{% endfor %}
 	</div>
 {% endif %}

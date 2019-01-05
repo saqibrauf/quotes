@@ -24,6 +24,11 @@ b, strong {
 	font-weight: 700;
 }
 
-.box {
-	background-color: #EAEAEA;
+.background {
+	background-position: center;
+	background-size: cover;
+}
+
+.bg1 {
+	background-image: url(../images/bg1.jpeg);
 }

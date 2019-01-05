@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html class="has-navbar-fixed-top">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,25 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-	<nav class="navbar is-primary is-fixed-top">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="{% url 'index' %}">
-                	<p class="is-marginless has-text-white is-size-4 has-text-weight-bold">Quote<span class="has-text-weight-normal">Hawks</span></p>
-                </a>
-                <div class="navbar-burger burger" data-target="navMain">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <div id="navMain" class="navbar-menu">
-                <div class="navbar-end">
-                    
-                </div>
-            </div>
-        </div>
-    </nav>
+    {% include 'navbar.html' %}
     <div class="section">
         <div class="container content">
             <div class="columns is-desktop">
@@ -41,14 +23,7 @@
                 </main>
                 <hr class="is-hidden-desktop">
                 <aside class="column is-3-desktop">
-                    {% if author_list %}
-                        <h3 class="is-size-5">Authors</h3>
-                        <ul>
-                            {% for a in author_list %}
-                                <li><a class="has-text-dark has-text-weight-bold" href="{% url 'author' a.author_slug %}">{{a.author_name}}</a></li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
+                    {% include 'aside.html' %}
                     {% block 'sidebar' %}{% endblock %}
                 </aside>
             </div>

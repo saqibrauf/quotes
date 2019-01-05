@@ -16,7 +16,8 @@ urlpatterns = [
 
 
     path('', views.index, name = 'index'),
-    path('quote/<slug>', views.quote, name = 'quote'),
-    path('quotes-of-<slug>', views.author, name = 'author'),
-    path('<slug>-quotes', views.tag, name = 'tag'),
+    path('quote/<slug>-<id>', views.quote, name = 'quote'),
+    path('author/<slug>-quotes-<id>', views.author, name = 'author'),
+    path('tags/<slug>-quotes', views.tag, name = 'tag'),
+    path('save-quote', views.save_quote, name = 'save_quote'),
 ]

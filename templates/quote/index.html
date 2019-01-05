@@ -1,0 +1,39 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block 'title' %}{{ title }} - QuoteHawks.Com{% endblock %}
+{% block 'description' %}{% endblock %}
+
+{% block 'content' %}
+
+<h1>{{ title|title }}</h1>
+<hr>
+<div class="columns is-desktop is-multiline">
+	{% for q in quotes %}
+		<div class="column is-6-desktop">
+			<div class="box is-radiusless is-flex" style="min-height: 100%; flex-direction: column; justify-content: space-between;">
+				<div class="content">
+					<blockquote class="has-background-white">
+						{% if q.slug %}
+							<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}">{{q.quote}}</a>
+						{% else %}
+							<a class="has-text-black" href="{% url 'quote' slug='-' id=q.id %}">{{q.quote}}</a>
+						{% endif %}						
+					</blockquote>	
+					<cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' slug=q.author.slug id=q.author.id %}">{{q.author}}</a></cite>	
+				</div>
+				{% if q.tags %}
+					<div class="tags">
+						{% for t in q.tags.all %}
+							<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}}</a>
+						{% endfor %}
+					</div>
+				{% endif %}	
+			</div>
+		</div>
+	{% empty %}
+		<p class="is-size-1">There is no quote to display.</p>
+	{% endfor %}
+</div>
+
+{% endblock %}

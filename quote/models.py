@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import Truncator
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from datetime import datetime
@@ -8,38 +7,41 @@ from taggit.managers import TaggableManager
 
 
 class Author(models.Model):
-	author_name = models.CharField(max_length=100, unique=True)
-	author_slug = models.SlugField(max_length=100, editable=False)
+	name = models.CharField(max_length=100, unique=True)
+	slug = models.SlugField(max_length=100, editable=False)
 
 	def __str__(self):
-		return self.author_name.title()
+		return self.name.title()
 
 	def save(self, *args, **kwargs):
-		self.author_slug = slugify(self.author_name)
+		self.slug = slugify(self.name)
 		super().save(*args, **kwargs)
 	
 	def get_absolute_url(self):
-		return reverse('author', args=[str(self.author_slug)])
+		return reverse('author', args=[str(self.slug), str(self.id)])
 
 
 class Quote(models.Model):
-	#user_name = models.ForeignKey(User, on_delete=models.CASCADE)
-	author_name = models.ForeignKey(Author, on_delete=models.CASCADE, blank=True, null=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quotes')
+	author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='quotes')
 	date_created = models.DateTimeField(auto_now=True)
-	quote = models.TextField(unique=True)
-	tags = TaggableManager()
-	quote_slug = models.SlugField(max_length=100, blank=True, editable=False)
+	quote = models.TextField()
+	tags = TaggableManager(blank=True)
+	slug = models.SlugField(max_length=200, blank=True, editable=False)
+	bq_url = models.CharField(max_length=250, blank=True, null=True, verbose_name='BQ URL', editable=False)
 
 	def __str__(self):
-		return Truncator(self.quote).chars(100, truncate='') + ' (' + self.author_name.author_name.title() + ')'
+		return self.quote[:50] + ' (' + self.author.name.title() + ')'
 
 	def save(self, *args, **kwargs):
-		self.quote_slug = Truncator(slugify(self.quote)).chars(100, truncate='')
-		if not self.author_name:
-			author = Author.objects.get(author_name='Anonymous')
-			self.author_name = author
+		self.slug = slugify(self.quote[:100])
+		if not self.user:
+			self.user = User.objects.get(username='amadarsal')
+		if not self.author:
+			author = Author.objects.get(name='Anonymous')
+			self.author = author
 		super().save(*args, **kwargs)
 
 	def get_absolute_url(self):
-		return reverse('quote', args=[str(self.quote_slug)])
+		return reverse('quote', args=[str(self.slug), str(self.id)])
 
