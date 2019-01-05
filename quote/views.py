@@ -7,8 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
-	title = 'Recent Quotes'
-	quotes = Quote.objects.all().order_by('date_created')
+	title = 'Fresh And Latest Quotes'
+	quotes = Quote.objects.all().order_by('-date_created')
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(quotes, 300)
@@ -41,7 +41,7 @@ def all_authors(request):
 def author(request, slug, id):
 	author = Author.objects.get(id=id)
 	title = author.name + ' Quotes'
-	quotes = author.quotes.all()
+	quotes = author.quotes.all().order_by('-date_created')
 	context = {
 		'title' : title,
 		'quotes' : quotes,
@@ -52,7 +52,7 @@ def author(request, slug, id):
 def tag(request, slug):
 	tag = Tag.objects.get(slug=slug)
 	title = tag.name + ' Quotes'
-	quotes = Quote.objects.filter(tags__name=tag)
+	quotes = Quote.objects.filter(tags__name=tag).order_by('-date_created')
 	context = {
 		'title' : title,
 		'quotes' : quotes,
