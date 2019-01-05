@@ -4,10 +4,21 @@ from .models import Author, Quote
 from django.contrib.auth.models import User
 from taggit.models import Tag
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
 	title = 'Recent Quotes'
 	quotes = Quote.objects.all().order_by('date_created')
+
+	page = request.GET.get('page', 1)
+	paginator = Paginator(quotes, 300)
+	try:
+		quotes = paginator.page(page)
+	except PageNotAnInteger:
+		quotes = paginator.page(1)
+	except EmptyPage:
+		quotes = paginator.page(paginator.num_pages)	
+
 	context = {
 		'title' : title,
 		'quotes' : quotes,
@@ -20,6 +31,12 @@ def quote(request, id, slug):
 		'quote' : quote,
 	}
 	return render(request, 'quote/quote.html', context)
+
+def all_authors(request):
+	context = {
+		'title' : 'List Of All Authors',
+	}
+	return render(request, 'quote/all_authors.html', context)
 
 def author(request, slug, id):
 	author = Author.objects.get(id=id)

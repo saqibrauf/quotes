@@ -1,8 +1,9 @@
-{% if author_list %}
+{% if AUTHORS %}
     <h3 class="is-size-5">Authors</h3>
     <ul>
-        {% for a in author_list %}
-            <li><a class="has-text-dark has-text-weight-bold" href="{% url 'quote:author' slug=a.slug id=a.id %}">{{a.name}}</a></li>
+        {% for a in AUTHORS|slice:':50' %}
+            <li><a class="has-text-dark has-text-weight-bold" href="{% url 'author' slug=a.slug id=a.id %}">{{a.name}}</a></li>
         {% endfor %}
     </ul>
+    <a class="button is-black" href="{% url 'all_authors' %}">ALL AUTHORS</a>
 {% endif %}

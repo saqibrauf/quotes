@@ -10,6 +10,9 @@ class Author(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	slug = models.SlugField(max_length=100, editable=False)
 
+	def first_letter(self):
+		return self.name and self.name[0] or ''
+
 	def __str__(self):
 		return self.name.title()
 

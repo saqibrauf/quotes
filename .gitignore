@@ -3,4 +3,5 @@
 __pycache__
 /static
 /bulmaQ
+db.sqlite3
 script.py

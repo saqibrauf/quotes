@@ -1,8 +1,8 @@
 
-<nav class="navbar is-dark">
+<nav class="navbar is-black">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item" href="{% url 'index' %}">
+            <a class="navbar-item has-background-danger" href="{% url 'index' %}">
             	<p class="is-marginless has-text-white is-size-4 has-text-weight-bold">Quote<span class="has-text-weight-normal">Hawks</span></p>
             </a>
             <div class="navbar-burger burger" data-target="navMain">
@@ -12,8 +12,8 @@
             </div>
         </div>
         <div id="navMain" class="navbar-menu">
-            <div class="navbar-end">
-                
+            <div class="navbar-start">
+                <a class="navbar-item is-uppercase" href="{% url 'all_authors' %}">Authors</a>
             </div>
         </div>
     </div>

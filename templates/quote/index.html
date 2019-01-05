@@ -9,7 +9,7 @@
 <h1>{{ title|title }}</h1>
 <hr>
 <div class="columns is-desktop is-multiline">
-	{% for q in quotes %}
+	{% for q in quotes|slice:':200' %}
 		<div class="column is-6-desktop">
 			<div class="box is-radiusless is-flex" style="min-height: 100%; flex-direction: column; justify-content: space-between;">
 				<div class="content">
@@ -35,5 +35,30 @@
 		<p class="is-size-1">There is no quote to display.</p>
 	{% endfor %}
 </div>
+
+{% if quotes.has_other_pages %}
+	<nav class="pagination is-right">
+		{% if quotes.has_previous %}
+			<a rel="prev" class="pagination-previous" href="?page={{ quotes.previous_page_number }}">Previous</a>
+		{% else %}
+			<a class="pagination-previous" disabled>Previous</a>
+		{% endif %}
+		{% if quotes.has_next %}
+			<a rel="next" class="pagination-next" href="?page={{ quotes.next_page_number }}">Next</a>
+		{% else %}
+			<a class="pagination-next" disabled>Next</a>
+		{% endif %}
+
+		<ul class="pagination-list" style="list-style: none; margin: 0;">
+			{% for i in quotes.paginator.page_range %}
+				{% if quotes.number == i %}
+					<li><a class="pagination-link is-current">{{ i }}</a></li>
+				{% else %}
+					<li><a class="pagination-link" href="?page={{ i }}">{{ i }}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
+{% endif %}
 
 {% endblock %}
