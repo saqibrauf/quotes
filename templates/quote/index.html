@@ -42,8 +42,12 @@
 	{% endfor %}
 </div>
 
+<div class="loading notification is-black has-text-centered is-radiusless" style="display: none;">
+    <p class="is-size-3">Loading...</p>
+</div>
+
 {% if quotes.has_next %}
-    <a class="infinite-more-link button is-large is-block" href="?page={{ quotes.next_page_number }}">Load More</a>
+    <a class="infinite-more-link button is-large is-block is-hidden" href="?page={{ quotes.next_page_number }}">Load More</a>
 {% endif %}
 
 
@@ -76,8 +80,14 @@
 {% endblock %}
 {% block 'scripts' %}
 	<script>
-		var infinite = new Waypoint.Infinite({
-		  element: $('.infinite-container')[0]
-		});
-	</script>
+	    var infinite = new Waypoint.Infinite({
+	      element: $('.infinite-container')[0],
+	      onBeforePageLoad: function () {
+	        $('.loading').show();
+	      },
+	      onAfterPageLoad: function ($items) {
+	        $('.loading').hide();
+	      }
+	    });
+  </script>
 {% endblock %}
