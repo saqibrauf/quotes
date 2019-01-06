@@ -8,31 +8,84 @@
 	<title>{% block 'title' %}QuoteHawks.Com{% endblock %}</title>
     <meta name="description" content="{% block 'description' %}{% endblock %}">
 	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,700" rel="stylesheet">
-     <link rel="canonical" href="{{request.build_absolute_uri}}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="canonical" href="{{request.build_absolute_uri}}" />
     <link rel="icon" href="{% static 'images/quote.png' %}" type="image/png">
 	<link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     {% include 'navbar.html' %}
-    <div class="section">
-        <div class="container content">
-            <div class="columns is-desktop">
+    <div class="hero is-primary">
+        {% with RANDOM_IMAGES|random as image %}
+            <div class="hero-body" style="background-image: url({% static image %}); background-size: cover; background-position: center;">
+                <div class="columns is-marginless is-paddingless">
+                    <div class="column is-6 is-offset-3 is-paddingless" style="position: relative;">
+                        <div class="field has-addons">
+                            <p class="control is-expanded">
+                                <input id="SEARCH" class="input is-dark is-large" type="text" placeholder="SEARCH FOR AUTHORS OR TOPICS">
+                            </p>
+                        </div>
+                        <div id="SearchDiv" class="notification is-primary is-hidden is-radiusless" style="position: absolute; top: 3.5rem; z-index: 99; width: 100%;">
+                            {% include 'quote/search.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    </div>
+    <div class="container">
+        <div class="content is-marginless">
+            <div class="columns is-desktop is-paddingless is-marginless">
                 <main class="column is-9-desktop">
-                    {% block 'content' %}{% endblock %}
+                    <div class="section">
+                        {% block 'content' %}{% endblock %}
+                    </div>
                 </main>
                 <hr class="is-hidden-desktop">
-                <aside class="column is-3-desktop">
-                    {% include 'aside.html' %}
-                    {% block 'sidebar' %}{% endblock %}
+                <aside class="column is-3-desktop has-background-white-ter">
+                    <div class="section">
+                        {% include 'aside.html' %}
+                        {% block 'sidebar' %}{% endblock %}
+                    </div>
                 </aside>
             </div>
         </div>
     </div>
-    <footer class="footer has-background-dark has-text-centered">
+    <footer class="footer has-background-black has-text-centered">
         <a class="is-size-3 has-text-light has-text-weight-bold is-uppercase" href="{% url 'index' %}">Quote Hawks</a>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/infinite.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $('#SEARCH').keyup(function(){
+                var term = $('#SEARCH').val();
+                $.ajax({
+                    type : 'get',
+                    url: '{% url 'search' %}',
+                    data: {
+                      'term': term
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            $('#SearchDiv').removeClass('is-hidden');
+                            $('#SearchDiv').html(data.search_html);
+                        }              
+                    }
+                });
+            })
+
+            $('#SearchDiv').on('click', '.delete', function() {
+                $('#SearchDiv').addClass('is-hidden');
+                $('#SEARCH').val('');
+            });
+        })
+    </script>
+    {% block 'scripts' %}{% endblock %}
 </body>
 </html>

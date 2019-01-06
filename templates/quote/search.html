@@ -1,0 +1,7 @@
+<button class="delete is-large"></button>
+{% for t in topics|slice:':5' %}
+	<p><a class="is-uppercase" href="{% url 'tag' slug=t.slug %}">{{ t.name }} in Topics</a></p>
+{% endfor %}
+{% for a in authors|slice:':5' %}
+	<p><a class="is-uppercase" href="{% url 'author' slug=a.slug id=a.id %}">{{ a.name }} in Authors</a></p>
+{% endfor %}

@@ -20,6 +20,6 @@ urlpatterns = [
     path('all-authors', views.all_authors, name = 'all_authors'),
     path('author/<slug>-quotes-<id>', views.author, name = 'author'),
     path('tags/<slug>-quotes', views.tag, name = 'tag'),
+    path('search', views.search, name = 'search'),
     path('save-quote', views.save_quote, name = 'save_quote'),
-
 ]

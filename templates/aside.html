@@ -1,9 +1,18 @@
-{% if AUTHORS %}
-    <h3 class="is-size-5">Authors</h3>
+{% if SIDEBAR_TOPICS %}
+    <h3 class="is-size-5">Most Popular Topics</h3>
     <ul>
-        {% for a in AUTHORS|slice:':50' %}
-            <li><a class="has-text-dark has-text-weight-bold" href="{% url 'author' slug=a.slug id=a.id %}">{{a.name}}</a></li>
+        {% for t in SIDEBAR_TOPICS|slice:':25' %}
+            <li><a class="has-text-dark" href="{% url 'tag' slug=t.slug %}">{{t.name|title}} ({{t.num_quotes}})</a></li>
         {% endfor %}
     </ul>
-    <a class="button is-black" href="{% url 'all_authors' %}">ALL AUTHORS</a>
+{% endif %}
+{% if SIDEBAR_AUTHORS %}
+    <h3 class="is-size-5">Most Popular Authors</h3>
+    <ul>
+        {% for a in SIDEBAR_AUTHORS|slice:':25' %}
+            <li><a class="has-text-dark" href="{% url 'author' slug=a.slug id=a.id %}">{{a.name|title}} ({{a.num_quotes}})</a></li>
+        {% endfor %}
+        <li><a class="has-text-dark has-text-weight-bold" href="{% url 'all_authors' %}">All Authors</a></li>
+    </ul>
+    
 {% endif %}

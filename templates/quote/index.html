@@ -8,11 +8,17 @@
 
 <h1>{{ title|title }}</h1>
 <hr>
-<div class="columns is-desktop is-multiline">
-	{% for q in quotes|slice:':200' %}
-		<div class="column is-6-desktop">
+
+<div class="infinite-container columns is-desktop is-multiline">
+	{% for q in quotes %}
+		<div class="infinite-item column is-6-desktop">
 			<div class="box is-radiusless is-flex" style="min-height: 100%; flex-direction: column; justify-content: space-between;">
 				<div class="content">
+					<figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
+						{% with RANDOM_IMAGES|random as image %}
+						  	<img src="{% static image %}"/>
+						{% endwith %}
+					</figure>
 					<blockquote class="has-background-white">
 						{% if q.slug %}
 							<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}">{{q.quote}}</a>
@@ -36,7 +42,13 @@
 	{% endfor %}
 </div>
 
-{% if quotes.has_other_pages %}
+{% if quotes.has_next %}
+    <a class="infinite-more-link button is-large is-block" href="?page={{ quotes.next_page_number }}">Load More</a>
+{% endif %}
+
+
+
+<!--{% if quotes.has_other_pages %}
 	<nav class="pagination-">
 		{% if quotes.has_previous %}
 			<a rel="prev" class="pagination-previous" href="?page={{ quotes.previous_page_number }}">Previous</a>
@@ -59,6 +71,13 @@
 			{% endfor %}
 		</ul>
 	</nav>
-{% endif %}
+{% endif %}-->
 
+{% endblock %}
+{% block 'scripts' %}
+	<script>
+		var infinite = new Waypoint.Infinite({
+		  element: $('.infinite-container')[0]
+		});
+	</script>
 {% endblock %}

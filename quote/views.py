@@ -1,17 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Author, Quote
 from django.contrib.auth.models import User
 from taggit.models import Tag
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template import loader
 
 def index(request):
 	title = 'Fresh And Latest Quotes'
 	quotes = Quote.objects.all().order_by('-date_created')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 300)
+	paginator = Paginator(quotes, 20)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
@@ -42,6 +43,16 @@ def author(request, slug, id):
 	author = Author.objects.get(id=id)
 	title = author.name + ' Quotes'
 	quotes = author.quotes.all().order_by('-date_created')
+
+	page = request.GET.get('page', 1)
+	paginator = Paginator(quotes, 20)
+	try:
+		quotes = paginator.page(page)
+	except PageNotAnInteger:
+		quotes = paginator.page(1)
+	except EmptyPage:
+		quotes = paginator.page(paginator.num_pages)
+
 	context = {
 		'title' : title,
 		'quotes' : quotes,
@@ -53,6 +64,16 @@ def tag(request, slug):
 	tag = Tag.objects.get(slug=slug)
 	title = tag.name + ' Quotes'
 	quotes = Quote.objects.filter(tags__name=tag).order_by('-date_created')
+
+	page = request.GET.get('page', 1)
+	paginator = Paginator(quotes, 20)
+	try:
+		quotes = paginator.page(page)
+	except PageNotAnInteger:
+		quotes = paginator.page(1)
+	except EmptyPage:
+		quotes = paginator.page(paginator.num_pages)
+		
 	context = {
 		'title' : title,
 		'quotes' : quotes,
@@ -86,3 +107,15 @@ def save_quote(request):
 			for t in tags:
 				new_quote.tags.add(t)
 			return HttpResponse('Saved')
+
+
+def search(request):
+	if request.method == 'GET':
+		term = request.GET.get('term')
+		authors = Author.objects.filter(name__icontains=term)
+		topics = Tag.objects.filter(name__icontains=term)
+		search_html = loader.render_to_string('quote/search.html', {'topics' : topics, 'authors' : authors})
+		data = {
+			'search_html' : search_html,
+		}
+		return JsonResponse(data)
