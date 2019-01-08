@@ -37,13 +37,13 @@
     <div class="container">
         <div class="content is-marginless">
             <div class="columns is-desktop is-paddingless is-marginless">
-                <main class="column is-9-desktop">
+                <main class="column is-9-desktop is-marginless is-paddingless">
                     <div class="section">
                         {% block 'content' %}{% endblock %}
                     </div>
                 </main>
                 <hr class="is-hidden-desktop">
-                <aside class="column is-3-desktop has-background-white-ter">
+                <aside class="column is-3-desktop has-background-white-ter is-marginless is-paddingless">
                     <div class="section">
                         {% include 'aside.html' %}
                         {% block 'sidebar' %}{% endblock %}

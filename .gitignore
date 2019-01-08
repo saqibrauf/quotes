@@ -5,3 +5,4 @@ __pycache__
 /bulmaQ
 db.sqlite3
 script.py
+topics.py
