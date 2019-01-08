@@ -6,3 +6,4 @@ __pycache__
 db.sqlite3
 script.py
 topics.py
+.env
