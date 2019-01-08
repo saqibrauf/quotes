@@ -107,6 +107,8 @@ def save_quote(request):
 			for t in tags:
 				new_quote.tags.add(t)
 			return HttpResponse('Saved')
+		return HttpResponse('Unknown')
+	return HttpResponse('Not Allowed')
 
 
 def search(request):
