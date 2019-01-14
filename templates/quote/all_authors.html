@@ -13,7 +13,7 @@
 
 	<div class="tags">
 		{% for letter in letter_list %}
-			<a class="tag button is-info is-uppercase has-text-weight-bold is-large" href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
+			<a class="tag button is-info is-uppercase has-text-weight-bold is-large" href="#{{ letter.grouper }}" target="_blank">{{ letter.grouper }}</a>
 		{% endfor %}
 	</div>  
 
@@ -21,7 +21,7 @@
 	  	<h2 id="{{ letter.grouper }}">Authors Name Starts With {{ letter.grouper }}</h2>
 	    <div class="tags">
 	        {% for item in letter.list %}
-	        	<a class="tag button is-outlined is-black is-capitalized" href="{% url 'author' slug=item.slug id=item.id %}">{{item.name}}</a>
+	        	<a class="tag button is-outlined is-black is-capitalized" href="{% url 'author' slug=item.slug id=item.id %}" target="_blank">{{item.name}}</a>
 	        {% endfor %}
 	    </div>
 	{% endfor %}

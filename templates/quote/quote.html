@@ -14,14 +14,14 @@
 			{% endwith %}
 		</figure>
 		<blockquote class="is-size-3-desktop is-size-5-mobile has-background-white">{{quote.quote}}</blockquote>
-		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' slug=quote.author.slug id=quote.author.id %}">({{quote.author}})</a></cite>	
+		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' slug=quote.author.slug id=quote.author.id %}" target="_blank">({{quote.author}})</a></cite>	
 	</div>
 </div>
 
 {% if quote.tags.all %}
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}}</a>
+			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}" target="_blank">{{t.name}}</a>
 		{% endfor %}
 	</div>
 {% endif %}
