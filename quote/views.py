@@ -68,6 +68,7 @@ def author(request, slug, id):
 def tag(request, slug):
 	tag = Tag.objects.get(slug=slug)
 	title = tag.name + ' Quotes'
+	desc = 'Share the best ' + tag.name.title() + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + tag.name.title() + ' Quote of the Day on the web, Facebook and blogs.'
 	quotes = Quote.objects.filter(tags__name=tag).order_by('-date_created')
 
 	page = request.GET.get('page', 1)
@@ -82,6 +83,7 @@ def tag(request, slug):
 	context = {
 		'tag' : tag,
 		'title' : title,
+		'desc' : desc,
 		'quotes' : quotes,
 	}
 	return render(request, 'quote/index.html', context)
