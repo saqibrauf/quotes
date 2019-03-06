@@ -54,6 +54,7 @@ def author(request, slug, id):
 		quotes = paginator.page(paginator.num_pages)
 
 	context = {
+		'author' : author,
 		'title' : title,
 		'quotes' : quotes,
 	}
@@ -75,6 +76,7 @@ def tag(request, slug):
 		quotes = paginator.page(paginator.num_pages)
 		
 	context = {
+		'tag' : tag,
 		'title' : title,
 		'quotes' : quotes,
 	}
