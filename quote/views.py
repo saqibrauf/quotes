@@ -44,7 +44,7 @@ def all_authors(request):
 def author(request, slug, id):
 	author = Author.objects.get(id=id)
 	title = author.name + ' Quotes'
-	desc = 'Find best ' + {{author.name|title}}  + ' Quotes from QuotesHawks.com. send ' + {{author.name|title}} + ' Quotes to your friends and family daily updated list with trendy hot ' + {{author.name|title}} + ' Quotes'
+	desc = 'Find best ' + author.name.title()  + ' Quotes from QuotesHawks.com. send ' + author.name.title() + ' Quotes to your friends and family daily updated list with trendy hot ' + author.name.title() + ' Quotes'
 	quotes = author.quotes.all().order_by('-date_created')
 
 	page = request.GET.get('page', 1)
