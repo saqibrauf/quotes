@@ -59,6 +59,7 @@ def author(request, slug, id):
 	context = {
 		'author' : author,
 		'title' : title,
+		'desc' : desc,
 		'quotes' : quotes,
 	}
 	return render(request, 'quote/index.html', context)
