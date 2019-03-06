@@ -9,6 +9,7 @@ from django.template import loader
 
 def index(request):
 	title = 'Fresh And Latest Quotes'
+	desc = 'Enjoy the best Quotes at QuoteHawks. Quotations by famous authors and some of the most beautiful quotes on any topic to help you express how your feelings.'
 	quotes = Quote.objects.all().order_by('-date_created')
 
 	page = request.GET.get('page', 1)
@@ -22,6 +23,7 @@ def index(request):
 
 	context = {
 		'title' : title,
+		'desc' : desc,
 		'quotes' : quotes,
 	}
 	return render(request, 'quote/index.html', context)
