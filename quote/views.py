@@ -30,8 +30,12 @@ def index(request):
 
 def quote(request, id, slug):
 	quote = Quote.objects.get(id=id)
+	tags = quote.tags.all()
+	quotes = Quote.objects.filter(tags__in=tags)
 	context = {
 		'quote' : quote,
+		'quotes' : quotes,
+		'tags' : tags,
 	}
 	return render(request, 'quote/quote.html', context)
 
