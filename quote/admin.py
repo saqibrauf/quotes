@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Quote
+from .models import Author, Quote, Content
 from django.template.defaultfilters import slugify
 from taggit.models import Tag
 
@@ -27,3 +27,4 @@ class QuoteAdmin(admin.ModelAdmin):
 
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Quote, QuoteAdmin)
+admin.site.register(Content)

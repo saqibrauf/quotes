@@ -6,6 +6,21 @@ from datetime import datetime
 from taggit.managers import TaggableManager
 
 
+class Content(models.Model):
+	title = models.CharField(max_length=255, unique=True)
+	content = models.TextField(blank=True)
+	slug = models.SlugField(blank=True)
+
+	def __str__(self):
+		return self.title.title()
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.title)
+		super().save(*args, **kwargs)
+	
+	def get_absolute_url(self):
+		return reverse()
+
 class Author(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	slug = models.SlugField(max_length=100, editable=False)

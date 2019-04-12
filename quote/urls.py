@@ -16,6 +16,7 @@ urlpatterns = [
 
 
     path('', views.index, name = 'index'),
+    path('<slug>/', views.content, name = 'content'), 
     path('quote/<slug>-<id>', views.quote, name = 'quote'),
     path('all-authors', views.all_authors, name = 'all_authors'),
     path('author/<slug>-quotes-<id>', views.author, name = 'author'),

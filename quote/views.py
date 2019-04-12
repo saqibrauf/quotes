@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Author, Quote
+from .models import Author, Quote, Content
 from django.contrib.auth.models import User
 from taggit.models import Tag
 from django.views.decorators.csrf import csrf_exempt
@@ -27,6 +27,13 @@ def index(request):
 		'quotes' : quotes,
 	}
 	return render(request, 'quote/index.html', context)
+
+def content(request, slug):
+	content = Content.objects.get(slug=slug)
+	context = {
+		'content' : content,
+	}
+	return render(request, 'quote/content.html', context)
 
 def quote(request, id, slug):
 	quote = Quote.objects.get(id=id)
