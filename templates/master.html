@@ -67,7 +67,7 @@
         <hr class="has-background-dark">
         <div class="buttons" style="justify-content: center;">
             {% for c in CONTENT %}
-                <a class="button is-dark" href="">{{ c.title }}</a>
+                <a class="button is-dark" href="{% url 'content' slug=c.slug %}">{{ c.title }}</a>
             {% endfor %}
         </div>
     </footer>
