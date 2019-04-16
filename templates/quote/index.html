@@ -14,11 +14,11 @@
 		<div class="infinite-item column is-6-desktop">
 			<div class="box is-radiusless is-flex" style="min-height: 100%; flex-direction: column; justify-content: space-between;">
 				<div class="content">
-					<figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
+					<!--figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
 						{% with RANDOM_IMAGES|random as image %}
 						  	<img src="{% static image %}"/>
 						{% endwith %}
-					</figure>
+					</figure-->
 					<blockquote class="has-background-white">
 						{% if q.slug %}
 							<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}" target="_blank">{{q.quote}}</a>

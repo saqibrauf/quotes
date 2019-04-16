@@ -8,11 +8,11 @@
 
 <div class="box">
 	<div class="content">
-		<figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
+		<!--figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
 			{% with RANDOM_IMAGES|random as image %}
 			  	<img src="{% static image %}"/>
 			{% endwith %}
-		</figure>
+		</figure-->
 		<blockquote class="is-size-3-desktop is-size-5-mobile has-background-white">{{quote.quote}}</blockquote>
 		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' slug=quote.author.slug id=quote.author.id %}" target="_blank">({{quote.author}})</a></cite>	
 	</div>
