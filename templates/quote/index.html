@@ -12,7 +12,7 @@
 <div class="infinite-container columns is-desktop is-multiline">
 	{% for q in quotes %}
 		<div class="infinite-item column is-6-desktop">
-			<div class="box is-radiusless is-flex" style="min-height: 100%; flex-direction: column; justify-content: space-between;">
+			<div class="box is-radiusless is-flex {% cycle 'has-background-light' 'has-background-grey-lighter' 'has-background-white-ter' %}" style="min-height: 100%; flex-direction: column; justify-content: space-between;">
 				<div class="content">
 					<!--figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
 						{% with RANDOM_IMAGES|random as image %}

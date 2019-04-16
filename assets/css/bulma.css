@@ -1819,9 +1819,9 @@ a.box:active {
   font-size: 1em;
   margin-bottom: 1em; }
 .content blockquote {
-  background-color: whitesmoke;
+  background-color: none;
   border-left: 5px solid #dbdbdb;
-  padding: 0 0 0 1em; }
+  padding: 1em; }
 .content ol {
   list-style: decimal outside;
   margin-left: 2em;
