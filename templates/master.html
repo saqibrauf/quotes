@@ -12,6 +12,10 @@
     <link rel="icon" href="{% static 'images/quote.png' %}" type="image/png">
 	<link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/infinite.min.js' %}"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124189653-2"></script>
     <script>
@@ -68,11 +72,7 @@
                 <a class="button is-dark" href="{% url 'content' slug=c.slug %}">{{ c.title }}</a>
             {% endfor %}
         </div>
-    </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/infinite.min.js' %}"></script>
+    </footer>    
     <script type="text/javascript">
         $(document).ready(function(){
 
