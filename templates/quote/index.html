@@ -38,52 +38,16 @@
 	{% endfor %}
 </div>
 
-<div class="loading notification is-black has-text-centered is-radiusless" style="display: none;">
-    <p class="is-size-3">Loading...</p>
+<div class="buttons">
+	{% if quotes.has_previous %}
+	    <a class="button is-large is-dark" href="?page={{ quotes.previous_page_number }}">Previous Page</a>
+	{% endif %}
+
+	{% if quotes.has_next %}
+	    <a class="button is-large is-dark" href="?page={{ quotes.next_page_number }}">Next Page</a>
+	{% endif %}
 </div>
 
-{% if quotes.has_next %}
-    <a class="infinite-more-link button is-large is-block is-hidden" href="?page={{ quotes.next_page_number }}">Load More</a>
-{% endif %}
 
 
-
-<!--{% if quotes.has_other_pages %}
-	<nav class="pagination-">
-		{% if quotes.has_previous %}
-			<a rel="prev" class="pagination-previous" href="?page={{ quotes.previous_page_number }}">Previous</a>
-		{% else %}
-			<a class="pagination-previous" disabled>Previous</a>
-		{% endif %}
-		{% if quotes.has_next %}
-			<a rel="next" class="pagination-next" href="?page={{ quotes.next_page_number }}">Next</a>
-		{% else %}
-			<a class="pagination-next" disabled>Next</a>
-		{% endif %}
-
-		<ul class="pagination-list" style="list-style: none; margin: 0;">
-			{% for i in quotes.paginator.page_range %}
-				{% if quotes.number == i %}
-					<li><a class="pagination-link is-current">{{ i }}</a></li>
-				{% else %}
-					<li><a class="pagination-link" href="?page={{ i }}">{{ i }}</a></li>
-				{% endif %}
-			{% endfor %}
-		</ul>
-	</nav>
-{% endif %}-->
-
-{% endblock %}
-{% block 'scripts' %}
-	<script>
-	    var infinite = new Waypoint.Infinite({
-	      element: $('.infinite-container')[0],
-	      onBeforePageLoad: function () {
-	        $('.loading').show();
-	      },
-	      onAfterPageLoad: function ($items) {
-	        $('.loading').hide();
-	      }
-	    });
-  </script>
 {% endblock %}

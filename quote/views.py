@@ -35,10 +35,13 @@ def content(request, slug):
 	}
 	return render(request, 'quote/content.html', context)
 
-def quote(request, id, slug):
+def quote(request, id, slug=''):
 	quote = Quote.objects.get(id=id)
+	#print(quote)
 	tags = quote.tags.all()
+	print (tags)
 	quotes = Quote.objects.filter(tags__in=tags)
+	print(quotes)
 	context = {
 		'quote' : quote,
 		'quotes' : quotes,
