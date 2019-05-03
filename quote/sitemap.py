@@ -6,6 +6,7 @@ from django.urls import reverse
 class AuthorSitemap(Sitemap):    
     changefreq = "daily"
     priority = 1.0
+    limit = 2000
 
     def items(self):
         return Author.objects.all()
@@ -13,6 +14,7 @@ class AuthorSitemap(Sitemap):
 class QuoteSitemap(Sitemap):    
     changefreq = "daily"
     priority = 1.0
+    limit = 2000
 
     def items(self):
         return Quote.objects.all()
@@ -20,6 +22,7 @@ class QuoteSitemap(Sitemap):
 class TagSitemap(Sitemap):    
     changefreq = "daily"
     priority = 1.0
+    limit = 2000
 
     def items(self):
         return Tag.objects.all()
