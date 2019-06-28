@@ -13,7 +13,7 @@ def index(request):#####################################Optimized#######
 	quotes = Quote.objects.all().prefetch_related('tags').prefetch_related('author')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 20)
+	paginator = Paginator(quotes, 21)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
@@ -60,7 +60,7 @@ def author(request, slug, id):#####################################Optimized####
 	quotes = Quote.objects.filter(author=author).prefetch_related('tags').prefetch_related('author')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 20)
+	paginator = Paginator(quotes, 21)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
@@ -84,7 +84,7 @@ def tag(request, slug):#####################################Optimized#######
 	quotes = Quote.objects.filter(tags__name=tag).prefetch_related('tags').prefetch_related('author')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 20)
+	paginator = Paginator(quotes, 21)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
