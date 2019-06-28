@@ -7,10 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import loader
 
-def index(request):
+def index(request):#####################################Optimized#######
 	title = 'Fresh And Latest Quotes'
 	desc = 'Enjoy the best Quotes at QuoteHawks. Quotations by famous authors and some of the most beautiful quotes on any topic to help you express how your feelings.'
-	quotes = Quote.objects.all().order_by('-date_created')
+	quotes = Quote.objects.all().prefetch_related('tags').prefetch_related('author')
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(quotes, 20)
@@ -35,17 +35,15 @@ def content(request, slug):
 	}
 	return render(request, 'quote/content.html', context)
 
-def quote(request, id, slug=''):
+def quote(request, id, slug=''):#####################################Optimized#######
 	quote = Quote.objects.get(id=id)
 	#print(quote)
-	tags = quote.tags.all()
-	print (tags)
-	quotes = Quote.objects.filter(tags__in=tags)
-	print(quotes)
+	#tags = quote.tags.all()
+	quotes = Quote.objects.filter(tags__in=quote.tags.all()).prefetch_related('author')
 	context = {
 		'quote' : quote,
 		'quotes' : quotes,
-		'tags' : tags,
+		#'tags' : tags,
 	}
 	return render(request, 'quote/quote.html', context)
 
@@ -55,11 +53,11 @@ def all_authors(request):
 	}
 	return render(request, 'quote/all_authors.html', context)
 
-def author(request, slug, id):
+def author(request, slug, id):#####################################Optimized#######
 	author = Author.objects.get(id=id)
 	title = author.name + ' Quotes'
 	desc = 'Find best ' + author.name.title()  + ' Quotes from QuotesHawks.com. send ' + author.name.title() + ' Quotes to your friends and family daily updated list with trendy hot ' + author.name.title() + ' Quotes'
-	quotes = author.quotes.all().order_by('-date_created')
+	quotes = Quote.objects.filter(author=author).prefetch_related('tags').prefetch_related('author')
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(quotes, 20)
@@ -79,11 +77,11 @@ def author(request, slug, id):
 	return render(request, 'quote/index.html', context)
 
 
-def tag(request, slug):
+def tag(request, slug):#####################################Optimized#######
 	tag = Tag.objects.get(slug=slug)
 	title = tag.name + ' Quotes'
 	desc = 'Share the best ' + tag.name.title() + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + tag.name.title() + ' Quote of the Day on the web, Facebook and blogs.'
-	quotes = Quote.objects.filter(tags__name=tag).order_by('-date_created')
+	quotes = Quote.objects.filter(tags__name=tag).prefetch_related('tags').prefetch_related('author')
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(quotes, 20)

@@ -9,28 +9,28 @@
 <div class="box">
 	<div class="content">		
 		<blockquote class="is-size-3-desktop is-size-5-mobile has-background-white has-text-weight-bold">{{quote.quote}}</blockquote>
-		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' slug=quote.author.slug id=quote.author.id %}" target="_blank">({{quote.author}})</a></cite>	
+		<cite class="is-size-5"><a class="has-text-primary" href="{% url 'author' slug=quote.author.slug id=quote.author.id %}">({{quote.author}})</a></cite>	
 	</div>
 </div>
 
-{% if quote.tags.all %}
+{% if quote.tags %}
 	<div class="tags">
 		{% for t in quote.tags.all %}
-			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}" target="_blank">{{t.name}}</a>
+			<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}}</a>
 		{% endfor %}
 	</div>
 {% endif %}
 
-{% if quotes %}
+{# if quotes #}
 	<div class="section has-background-light">
 		<h2>Related Quotes</h2>
 		{% for q in quotes|slice:':20' %}
 			<div class="box">
 				<blockquote class="has-background-white">
 					{% if q.slug %}
-						<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}" target="_blank">{{q.quote}}</a>
+						<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}">{{q.quote}}</a>
 					{% else %}
-						<a class="has-text-black" href="{% url 'quote' slug='-' id=q.id %}" target="_blank">{{q.quote}}</a>
+						<a class="has-text-black" href="{% url 'quote' slug='-' id=q.id %}">{{q.quote}}</a>
 					{% endif %}						
 				</blockquote>	
 				<cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' slug=q.author.slug id=q.author.id %}">{{q.author}}</a></cite>
@@ -39,6 +39,6 @@
 			<p class="is-size-1">There is no quote to display.</p>
 		{% endfor %}
 	</div>
-{% endif %}
+{# endif #}
 
 {% endblock %}

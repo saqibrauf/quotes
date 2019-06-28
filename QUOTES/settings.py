@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'quote',
     'taggit',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'QUOTES.urls'
@@ -75,6 +77,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'QUOTES.wsgi.application'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -141,4 +149,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TAGGIT_CASE_INSENSITIVE = True
 
 SITE_ID = 1
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
 

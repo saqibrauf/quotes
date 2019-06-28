@@ -17,9 +17,9 @@
 					
 					<blockquote class="has-background-white">
 						{% if q.slug %}
-							<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}" target="_blank">{{q.quote}}</a>
+							<a class="has-text-black" href="{% url 'quote' slug=q.slug id=q.id %}">{{q.quote}}</a>
 						{% else %}
-							<a class="has-text-black" href="{% url 'quote' slug='-' id=q.id %}" target="_blank">{{q.quote}}</a>
+							<a class="has-text-black" href="{% url 'quote' slug='-' id=q.id %}">{{q.quote}}</a>
 						{% endif %}						
 					</blockquote>	
 					<cite class="has-text-weight-bold"> <a class="has-text-primary" href="{% url 'author' slug=q.author.slug id=q.author.id %}">{{q.author}}</a></cite>	
@@ -27,7 +27,7 @@
 				{% if q.tags %}
 					<div class="tags">
 						{% for t in q.tags.all %}
-							<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}" target="_blank">{{t.name}}</a>
+							<a class="tag button is-outlined is-black is-capitalized" href="{% url 'tag' t.slug %}">{{t.name}}</a>
 						{% endfor %}
 					</div>
 				{% endif %}	
