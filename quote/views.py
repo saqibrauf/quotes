@@ -37,13 +37,10 @@ def content(request, slug):
 
 def quote(request, id, slug=''):#####################################Optimized########
 	quote = Quote.objects.get(id=id)
-	#print(quote)
-	#tags = quote.tags.all()
-	quotes = Quote.objects.filter(tags__in=quote.tags.all()).prefetch_related('author')
+	quotes = Quote.objects.filter(tags__in=quote.tags.all()).exclude(tags=quote.id).prefetch_related('author','tags')
 	context = {
 		'quote' : quote,
 		'quotes' : quotes,
-		#'tags' : tags,
 	}
 	return render(request, 'quote/quote.html', context)
 
@@ -78,10 +75,10 @@ def author(request, slug, id):#####################################Optimized####
 
 
 def tag(request, slug):#####################################Optimized#######
-	query = slug.strip()
-	title = query + ' Quotes'
-	desc = 'Share the best ' + query + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + query + ' Quote of the Day on the web, Facebook and blogs.'
-	quotes = Quote.objects.filter(quote__icontains=query).prefetch_related('tags', 'author')
+	tag = Tag.objects.get(slug=slug)
+	title = tag.name.title() + ' Quotes'
+	desc = 'Share the best ' + tag.name.title() + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + tag.name.title() + ' Quote of the Day on the web, Facebook and blogs.'
+	quotes = Quote.objects.filter(quote__icontains=tag.name.strip()).prefetch_related('tags', 'author')
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(quotes, 90)
