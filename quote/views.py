@@ -35,7 +35,7 @@ def content(request, slug):
 	}
 	return render(request, 'quote/content.html', context)
 
-def quote(request, id, slug=''):#####################################Optimized#######
+def quote(request, id, slug=''):#####################################Optimized########
 	quote = Quote.objects.get(id=id)
 	#print(quote)
 	#tags = quote.tags.all()
