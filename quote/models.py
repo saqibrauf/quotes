@@ -60,6 +60,9 @@ class Quote(models.Model):
 			self.author = author
 		super().save(*args, **kwargs)
 
+	class Meta:
+		ordering = ['-date_created']
+
 	def get_absolute_url(self):
 		return reverse('quote', args=[str(self.slug), str(self.id)])
 

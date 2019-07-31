@@ -78,10 +78,10 @@ def author(request, slug, id):#####################################Optimized####
 
 
 def tag(request, slug):#####################################Optimized#######
-	tag = Tag.objects.get(slug=slug)
-	title = tag.name + ' Quotes'
-	desc = 'Share the best ' + tag.name.title() + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + tag.name.title() + ' Quote of the Day on the web, Facebook and blogs.'
-	quotes = Quote.objects.filter(quote__icontains=tag.name.strip()).prefetch_related('tags', 'author')
+	query = slug.strip()
+	title = query + ' Quotes'
+	desc = 'Share the best ' + query + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + query + ' Quote of the Day on the web, Facebook and blogs.'
+	quotes = Quote.objects.filter(quote__icontains=query).prefetch_related('tags', 'author')
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(quotes, 90)
