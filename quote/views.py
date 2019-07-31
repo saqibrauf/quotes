@@ -10,10 +10,10 @@ from django.template import loader
 def index(request):#####################################Optimized#######
 	title = 'Fresh And Latest Quotes'
 	desc = 'Enjoy the best Quotes at QuoteHawks. Quotations by famous authors and some of the most beautiful quotes on any topic to help you express how your feelings.'
-	quotes = Quote.objects.all().prefetch_related('tags').prefetch_related('author')
+	quotes = Quote.objects.all().prefetch_related('tags', 'author')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 21)
+	paginator = Paginator(quotes, 90)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
@@ -57,10 +57,10 @@ def author(request, slug, id):#####################################Optimized####
 	author = Author.objects.get(id=id)
 	title = author.name + ' Quotes'
 	desc = 'Find best ' + author.name.title()  + ' Quotes from QuotesHawks.com. send ' + author.name.title() + ' Quotes to your friends and family daily updated list with trendy hot ' + author.name.title() + ' Quotes'
-	quotes = Quote.objects.filter(author=author).prefetch_related('tags').prefetch_related('author')
+	quotes = Quote.objects.filter(author=author).prefetch_related('tags', 'author')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 21)
+	paginator = Paginator(quotes, 90)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
@@ -81,10 +81,10 @@ def tag(request, slug):#####################################Optimized#######
 	tag = Tag.objects.get(slug=slug)
 	title = tag.name + ' Quotes'
 	desc = 'Share the best ' + tag.name.title() + ' quotes collection by famous authors, poets, philosophers and more. Enjoy our ' + tag.name.title() + ' Quote of the Day on the web, Facebook and blogs.'
-	quotes = Quote.objects.filter(tags__name=tag).prefetch_related('tags').prefetch_related('author')
+	quotes = Quote.objects.filter(quote__icontains=tag.name.strip()).prefetch_related('tags', 'author')
 
 	page = request.GET.get('page', 1)
-	paginator = Paginator(quotes, 21)
+	paginator = Paginator(quotes, 90)
 	try:
 		quotes = paginator.page(page)
 	except PageNotAnInteger:
